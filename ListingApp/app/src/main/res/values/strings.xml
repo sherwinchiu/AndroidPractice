@@ -12,4 +12,10 @@
         <item>$1.50</item>
         <item>$0.89</item>
     </string-array>
+
+    <string-array name = "descriptions">
+        <item>Very sweet. Very good fruit.</item>
+        <item>Juicy, plump, sour. Worst fruit every.</item>
+        <item>This is the best thing in the entire world.</item>
+    </string-array>
 </resources>
