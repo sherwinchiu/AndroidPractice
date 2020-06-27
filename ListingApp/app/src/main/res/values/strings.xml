@@ -1,19 +1,19 @@
 <resources>
     <string name="app_name">ListingApp</string>
 
-    <string-array name = "items">
+    <string-array name="items">
         <item>peach</item>
         <item>tomato</item>
         <item>potato</item>
     </string-array>
 
-    <string-array name = "prices">
+    <string-array name="prices">
         <item>$0.99</item>
         <item>$1.50</item>
         <item>$0.89</item>
     </string-array>
 
-    <string-array name = "descriptions">
+    <string-array name="descriptions">
         <item>Very sweet. Very good fruit.</item>
         <item>Juicy, plump, sour. Worst fruit every.</item>
         <item>This is the best thing in the entire world.</item>
