@@ -22,4 +22,8 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_MESSAGE, message); // Intent carries on data types called "extra", in this case message and original message
         startActivity(intent);
     }
+    public void startGame(View view){
+        Intent intent = new Intent(this, MainGameActivity.class);
+        startActivity(intent);
+    }
 }
