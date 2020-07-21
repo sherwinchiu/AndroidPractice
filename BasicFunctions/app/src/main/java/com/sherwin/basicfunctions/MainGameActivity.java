@@ -28,7 +28,7 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
     private char moves[][] = {  {0, 0, 0},   // 0 is blank
                                 {0, 0, 0},   // 1 is O circle
                                 {0, 0, 0}}; // 2 is X cross
-    private static int scores[] = new int[2];
+    private static int scores[] = {0, 0};
     private int buttonAccesses[] = new int [9];
     private static boolean inPlay = true;
     private char currentMove = 1; // 1 for O, 2 for X
@@ -49,13 +49,17 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
         player2TextView.setText(player2Name);
         TextView score1TextView = (TextView) findViewById(R.id.score1TextView);
         TextView score2TextView = (TextView) findViewById(R.id.score2TextView);
+        score1TextView.setText(String.valueOf(scores[0]));
+        score2TextView.setText(String.valueOf(scores[0]));
+        System.out.println("working");
         initializeButtons();
-
-
+        System.out.println("still working");
+        /**
         while(inPlay){
             score1TextView.setText(scores[0]);
             score2TextView.setText(scores[1]);
         }
+         */
     }
 
     /**
@@ -88,8 +92,9 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
         int buttonNum = view.getId();
         for(int i = 0; i < buttonIds.length; i++){
             if (buttonNum == buttonIds[i]) {
+                System.out.println("Button"+ i);
                 moves[(int) (i / 3)][i % 3] = changeTile();
-                buttonList[i].setText(changeTile());
+                buttonList[i].setText(String.valueOf(changeTile()));
             }
         }
     }
