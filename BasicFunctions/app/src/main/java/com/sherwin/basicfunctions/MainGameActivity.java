@@ -7,10 +7,14 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 public class MainGameActivity extends AppCompatActivity {
-    final private char LENGTH = 3;
+    private final char LENGTH = 3;
     private char pieces[][] = new char[LENGTH][LENGTH];
+    private static int scores[] = new int[2];
+    private static boolean inPlay = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_game);
 
@@ -22,7 +26,15 @@ public class MainGameActivity extends AppCompatActivity {
         TextView player2TextView = (TextView) findViewById(R.id.player2TextView);
         player1TextView.setText(player1Name);
         player2TextView.setText(player2Name);
+        TextView score1TextView = (TextView) findViewById(R.id.score1TextView);
+        TextView score2TextView = (TextView) findViewById(R.id.score2TextView);
+        while(inPlay){
+            score1TextView.setText(scores[0]);
+            score2TextView.setText(scores[1]);
 
+        }
+    }
+    private static void run(){
 
     }
 }

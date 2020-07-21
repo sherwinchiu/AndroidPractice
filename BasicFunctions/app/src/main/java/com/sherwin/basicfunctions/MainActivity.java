@@ -18,11 +18,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void sendMessage(View view){
-        Intent intent = new Intent(this, DisplayMessageActivity.class);
-        EditText editText = (EditText) findViewById(R.id.editText);
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message); // Intent carries on data types called "extra", in this case message and original message
-        startActivity(intent);
+
     }
     public void startGame(View view){
         Intent intent = new Intent(this, MainGameActivity.class);
