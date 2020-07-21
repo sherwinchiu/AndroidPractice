@@ -16,10 +16,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-
-    public void sendMessage(View view){
-
-    }
     public void startGame(View view){
         Intent intent = new Intent(this, MainGameActivity.class);
         EditText player1EditText = (EditText) findViewById(R.id.player1EditText);
