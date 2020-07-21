@@ -9,10 +9,29 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MainGameActivity extends AppCompatActivity implements View.OnClickListener{
+    private final char BLANK = 0;
+    private final char CIRCLE = 1;
+    private final char CROSS = 2;
     private final char LENGTH = 3;
-    private char moves[][] = new char[LENGTH][LENGTH];
+    public static int buttonIds[] = {
+            R.id.button1,
+            R.id.button2,
+            R.id.button3,
+            R.id.button4,
+            R.id.button5,
+            R.id.button6,
+            R.id.button7,
+            R.id.button8,
+            R.id.button9,
+    };
+    private Button buttonList[] = new Button[9];
+    private char moves[][] = {  {0, 0, 0},   // 0 is blank
+                                {0, 0, 0},   // 1 is O circle
+                                {0, 0, 0}}; // 2 is X cross
     private static int scores[] = new int[2];
+    private int buttonAccesses[] = new int [9];
     private static boolean inPlay = true;
+    private char currentMove = 0; // 1 for O, 2 for X
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,53 +55,39 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
         while(inPlay){
             score1TextView.setText(scores[0]);
             score2TextView.setText(scores[1]);
-
         }
     }
-    public void pressButton(View view){
 
+    /**
+     * Changes the tile a user presses
+     * @author Sherwin Chiu
+     * @return Character representing a circle or a cross (O or X)
+     */
+    private char changeTile(){
+        if (currentMove == BLANK){
+            return CIRCLE;
+        } else{
+            return CROSS;
+        }
     }
-    public void initializeButtons(){
-        Button button1 = (Button) findViewById(R.id.button1);
-        Button button2 = (Button) findViewById(R.id.button2);
-        Button button3 = (Button) findViewById(R.id.button3);
-        Button button4 = (Button) findViewById(R.id.button4);
-        Button button5 = (Button) findViewById(R.id.button5);
-        Button button6 = (Button) findViewById(R.id.button6);
-        Button button7 = (Button) findViewById(R.id.button7);
-        Button button8 = (Button) findViewById(R.id.button8);
-        Button button9 = (Button) findViewById(R.id.button9);
 
-        button1.setOnClickListener(this);
-        button2.setOnClickListener(this);
-        button3.setOnClickListener(this);
-        button4.setOnClickListener(this);
-        button5.setOnClickListener(this);
-        button6.setOnClickListener(this);
-        button7.setOnClickListener(this);
-        button8.setOnClickListener(this);
-        button9.setOnClickListener(this);
+    /**
+     * Initializes the 9 buttons used for the tictactoe grid
+     * @author Sherwin Chiu
+     */
+    private void initializeButtons(){
+        for(int i = 0; i < buttonList.length; i++) {
+            buttonList[i] = (Button) findViewById(buttonIds[i]);
+            buttonList[i].setOnClickListener(this);
+        }
     }
     @Override
     public void onClick(View view){
-        if (view.getId() == R.id.button1){
-            z
-        } else if (view.getId() == R.id.button2){
-
-        } else if (view.getId() == R.id.button3){
-
-        } else if (view.getId() == R.id.button4){
-
-        } else if (view.getId() == R.id.button5){
-
-        } else if (view.getId() == R.id.button6){
-
-        } else if (view.getId() == R.id.button7){
-
-        } else if (view.getId() == R.id.button8){
-
-        } else if (view.getId() == R.id.button9) {
-
+        int buttonNum = view.getId();
+        for(int i = 0; i < buttonIds.length; i++){
+            if (buttonNum == buttonIds[i]){
+                moves[i][i] = changeTile();
+            }
         }
     }
 }
