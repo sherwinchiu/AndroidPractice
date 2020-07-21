@@ -31,7 +31,7 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
     private static int scores[] = new int[2];
     private int buttonAccesses[] = new int [9];
     private static boolean inPlay = true;
-    private char currentMove = 0; // 1 for O, 2 for X
+    private char currentMove = 1; // 1 for O, 2 for X
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,9 +64,11 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
      * @return Character representing a circle or a cross (O or X)
      */
     private char changeTile(){
-        if (currentMove == BLANK){
+        if (currentMove == CIRCLE){
+            currentMove = CROSS;
             return CIRCLE;
-        } else{
+        } else {
+            currentMove = CIRCLE;
             return CROSS;
         }
     }
@@ -85,8 +87,9 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View view){
         int buttonNum = view.getId();
         for(int i = 0; i < buttonIds.length; i++){
-            if (buttonNum == buttonIds[i]){
-                moves[i][i] = changeTile();
+            if (buttonNum == buttonIds[i]) {
+                moves[(int) (i / 3)][i % 3] = changeTile();
+                buttonList[i].setText(changeTile());
             }
         }
     }
