@@ -23,7 +23,7 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
             R.id.button9,
     };
     private Button buttonList[] = new Button[9];
-    private char moves[][] = {  {0, 0, 0},   // 0 is blank
+    private int moves[][] = {  {0, 0, 0},   // 0 is blank
                                 {0, 0, 0},   // 1 is O circle
                                 {0, 0, 0}}; // 2 is X cross
     private static int scores[] = {0, 0};
@@ -85,24 +85,22 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
             buttonList[i].setOnClickListener(this);
         }
     }
-    private void printMoves(){
-        for(int i = 0; i < 3; i++){
-            System.out.println();
-            for(int j = 0; j < 3; j++){
-                System.out.print(moves[i][j]);
+    private void resetMoves(){
+        for(int i = 0; i < 2; i++){
+            for(int j = 0; j < 2; j++){
+                moves[i][j] = 0;
+                buttonList[i+j].setText("");
             }
-
         }
     }
     @Override
     public void onClick(View view){
         int buttonNum = view.getId();
         for(int i = 0; i < buttonIds.length; i++){
-            if (buttonNum == buttonIds[i]) {
-                System.out.println("Button"+ i);
-                moves[(int) (i / 3)][i % 3] = changeTile();
-                printMoves();
-                buttonList[i].setText(String.valueOf(changeTile()));
+            if (buttonNum == buttonIds[i] && !("1".equals(buttonList[i].getText()) || "2".equals(buttonList[i].getText()))){
+                int move = changeTile();
+                moves[(int) (i / 3)][i % 3] = move;
+                buttonList[i].setText(String.valueOf(move));
             }
         }
     }
