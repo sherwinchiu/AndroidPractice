@@ -9,10 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MainGameActivity extends AppCompatActivity implements View.OnClickListener{
-    private final char BLANK = 0;
     private final char CIRCLE = 1;
     private final char CROSS = 2;
-    private final char LENGTH = 3;
     public static int buttonIds[] = {
             R.id.button1,
             R.id.button2,
@@ -78,7 +76,7 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
     }
 
     /**
-     * Initializes the 9 buttons used for the tictactoe grid
+     * Initializes the 9 buttons used for the TicTacToe grid
      * @author Sherwin Chiu
      */
     private void initializeButtons(){
