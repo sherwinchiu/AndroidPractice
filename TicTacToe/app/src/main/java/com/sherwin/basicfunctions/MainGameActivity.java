@@ -85,6 +85,15 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
             buttonList[i].setOnClickListener(this);
         }
     }
+    private void printMoves(){
+        for(int i = 0; i < 3; i++){
+            System.out.println();
+            for(int j = 0; j < 3; j++){
+                System.out.print(moves[i][j]);
+            }
+
+        }
+    }
     @Override
     public void onClick(View view){
         int buttonNum = view.getId();
@@ -92,6 +101,7 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
             if (buttonNum == buttonIds[i]) {
                 System.out.println("Button"+ i);
                 moves[(int) (i / 3)][i % 3] = changeTile();
+                printMoves();
                 buttonList[i].setText(String.valueOf(changeTile()));
             }
         }
