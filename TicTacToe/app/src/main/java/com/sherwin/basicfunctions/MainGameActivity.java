@@ -85,6 +85,11 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
             buttonList[i].setOnClickListener(this);
         }
     }
+
+    /**
+     * Resets the moves on the board
+     * @author Sherwin Chiu
+     */
     private void resetMoves(){
         for(int i = 0; i < 2; i++){
             for(int j = 0; j < 2; j++){
@@ -92,6 +97,17 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
                 buttonList[i+j].setText("");
             }
         }
+    }
+
+    /**
+     * Checks if game has been won by a player, or if their is a draw
+     * @author Sherwin Chiu
+     */
+    public void gameWon(char move){
+        // Check if won horizontal
+        // Check if won vertical
+        // Check if won diagonal
+        // Check if draw
     }
     @Override
     public void onClick(View view){
@@ -104,4 +120,5 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
             }
         }
     }
+
 }
