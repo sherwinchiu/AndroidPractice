@@ -94,12 +94,11 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
             System.out.println();
         }
     }
-
     /**
      * Checks if game has been won by a player, or if their is a draw
      * @author Sherwin Chiu
      */
-    public void gameWon(){
+    private void gameWon(){
         int victoryScore = 0;
         for (int players = 1; players < 3; players++) {
             for(int i = 0; i < 3; i++){
@@ -114,10 +113,22 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
                     }
                 }
                 victoryScore = 0;
+                // Check if won vertical
+
+                for(int j = 0; j < 3; j++){
+                    if (players == moves[j][i]){
+                        victoryScore++;
+                        if (victoryScore == 3) {
+                            victoryScore = 0;
+                            resetMoves(CIRCLE);
+                        }
+                    }
+                }
+                victoryScore = 0;
             }
         }
 
-        // Check if won vertical
+
         // Check if won diagonal
         // Check if draw
     }
