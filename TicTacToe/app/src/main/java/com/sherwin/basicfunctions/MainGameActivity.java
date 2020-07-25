@@ -30,7 +30,8 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
     private int buttonAccesses[] = new int [9];
     private static boolean inPlay = true;
     private char currentMove = 1; // 1 for O, 2 for X
-
+    private TextView score1TextView;
+    private TextView score2TextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -45,19 +46,11 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
         TextView player2TextView = (TextView) findViewById(R.id.player2TextView);
         player1TextView.setText(player1Name);
         player2TextView.setText(player2Name);
-        TextView score1TextView = (TextView) findViewById(R.id.score1TextView);
-        TextView score2TextView = (TextView) findViewById(R.id.score2TextView);
+        score1TextView = (TextView) findViewById(R.id.score1TextView);
+        score2TextView = (TextView) findViewById(R.id.score2TextView);
         score1TextView.setText(String.valueOf(scores[0]));
-        score2TextView.setText(String.valueOf(scores[0]));
-        System.out.println("working");
+        score2TextView.setText(String.valueOf(scores[1]));
         initializeButtons();
-        System.out.println("still working");
-        /**
-        while(inPlay){
-            score1TextView.setText(scores[0]);
-            score2TextView.setText(scores[1]);
-        }
-         */
     }
 
     /**
@@ -90,12 +83,15 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
      * Resets the moves on the board
      * @author Sherwin Chiu
      */
-    private void resetMoves(){
-        for(int i = 0; i < 2; i++){
-            for(int j = 0; j < 2; j++){
-                moves[i][j] = 0;
-                buttonList[i+j].setText("");
+    private void resetMoves(int player){
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+               System.out.print(moves[i][j]);
+               moves[i][j] = 0;
+               buttonList[i+j].setText("");
+               scores[player]++;
             }
+            System.out.println();
         }
     }
 
@@ -103,8 +99,24 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
      * Checks if game has been won by a player, or if their is a draw
      * @author Sherwin Chiu
      */
-    public void gameWon(char move){
-        // Check if won horizontal
+    public void gameWon(){
+        int victoryScore = 0;
+        for (int players = 1; players < 3; players++) {
+            for(int i = 0; i < 3; i++){
+                for(int j = 0; j < 3; j++) {
+                // Check if won horizontal
+                    if (players == moves[i][j]) {
+                        victoryScore++;
+                        if (victoryScore == 3) {
+                            victoryScore = 0;
+                            resetMoves(CIRCLE);
+                        }
+                    }
+                }
+                victoryScore = 0;
+            }
+        }
+
         // Check if won vertical
         // Check if won diagonal
         // Check if draw
@@ -119,6 +131,8 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
                 buttonList[i].setText(String.valueOf(move));
             }
         }
+
+        gameWon();
     }
 
 }
