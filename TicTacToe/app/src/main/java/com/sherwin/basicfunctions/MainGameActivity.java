@@ -123,28 +123,17 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
                 victoryScore = 0;
                 // Check if won vertical (|||)
                 for(int j = 0; j < 3; j++){
-                    if (players == moves[j][i]){
-                        victoryScore++;
-                        if (victoryScore == 3) {
-                            victoryScore = 0;
-                            resetMoves(players);
-                        }
-                    }
+                    victoryScore += checkWon(players, j, i);
+                    checkScore(victoryScore, players);
                 }
                 victoryScore = 0;
-                // Check if won diagonal (\)
-                for(int j = 0; j < 3; j++){
-                    if(players == moves[j][j]){
-                        victoryScore++;
-                        if(victoryScore == 3){
-                            victoryScore = 0;
-                            resetMoves(players);
-                        }
-                    }
-                }
-                victoryScore = 0;
-
             }
+            for(int i = 0; i < 3; i++){
+                // Check if won diagonal (\)
+                victoryScore += checkWon(players, i, i);
+                checkScore(victoryScore, players);
+            }
+
         }
 
 
