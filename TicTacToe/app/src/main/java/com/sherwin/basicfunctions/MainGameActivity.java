@@ -35,7 +35,6 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
     private TextView score2TextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_game);
 
@@ -68,7 +67,6 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
             return CROSS;
         }
     }
-
     /**
      * Initializes the 9 buttons used for the TicTacToe grid
      * @author Sherwin Chiu
@@ -99,25 +97,6 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
         for(int i = 0; i < buttonList.length; i++){
             buttonList[i].setText("");
         }
-    }
-    private int checkWon(int player, int i, int j){
-        if (player == moves[i][j])
-            return 1;
-        return 0;
-    }
-    private void checkScore(int score, int player){
-        if(score == 3)
-            resetMoves(player);
-    }
-    private void checkDraw(){
-        int counter = 0;
-        for(int i = 0; i < 9; i++){
-            if (buttonList[i].getText().length()>0){
-                counter++;
-            }
-        }
-        if (counter == 9);
-        resetMoves(0);
     }
     /**
      * Checks if game has been won by a player, or if their is a draw
@@ -154,10 +133,47 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
         // Check if draw
         checkDraw();
     }
+
+    /**
+     * Checks who gets a 3-in-a-row
+     * @param player Specifies the player to check who wins
+     * @param i Specifies which index to put for rows
+     * @param j Specifies which index to put for columns
+     * @return Returns 1 or 0 based on if move exists in that position
+     */
+    private int checkWon(int player, int i, int j){
+        if (player == moves[i][j])
+            return 1;
+        return 0;
+    }
+
+    /**
+     * Checks the score for the 3-in-a-row and runs the method that adds score and resets
+     * @param score Gets the score for a 3-in-a-row
+     * @param player Gets the player who placed the 3-in-a-row
+     */
+    private void checkScore(int score, int player){
+        if(score == 3)
+            resetMoves(player);
+    }
+
+    /**
+     * Checks if a draw happens in the game
+     * @author Sherwin Chiu
+     */
+    private void checkDraw(){
+        int counter = 0;
+        for(int i = 0; i < buttonList.length; i++){
+            if (buttonList[i].getText().length()>0){
+                counter++;
+            }
+        }
+        if (counter == 9)
+            resetMoves(0);
+    }
     @Override
     public void onClick(View view){
         int buttonNum = view.getId();
-        System.out.println("Somethings been clicked!");
         for(int i = 0; i < buttonIds.length; i++){
             if (buttonNum == buttonIds[i] && !("1".equals(buttonList[i].getText()) || "2".equals(buttonList[i].getText()))){
                 int move = changeTile();
