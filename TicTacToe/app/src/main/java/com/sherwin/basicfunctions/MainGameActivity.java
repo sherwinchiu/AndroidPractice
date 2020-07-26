@@ -88,10 +88,13 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
             for(int j = 0; j < 3; j++){
                System.out.print(moves[i][j]);
                moves[i][j] = 0;
-               buttonList[i+j].setText("");
                scores[player]++;
+               currentMove = CIRCLE;
             }
             System.out.println();
+        }
+        for(int i = 0; i < buttonList.length; i++){
+            buttonList[i].setText("");
         }
     }
     /**
@@ -108,19 +111,18 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
                         victoryScore++;
                         if (victoryScore == 3) {
                             victoryScore = 0;
-                            resetMoves(CIRCLE);
+                            resetMoves(players);
                         }
                     }
                 }
                 victoryScore = 0;
                 // Check if won vertical
-
                 for(int j = 0; j < 3; j++){
                     if (players == moves[j][i]){
                         victoryScore++;
                         if (victoryScore == 3) {
                             victoryScore = 0;
-                            resetMoves(CIRCLE);
+                            resetMoves(players);
                         }
                     }
                 }
@@ -135,6 +137,7 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View view){
         int buttonNum = view.getId();
+        System.out.println("Somethings been clicked!");
         for(int i = 0; i < buttonIds.length; i++){
             if (buttonNum == buttonIds[i] && !("1".equals(buttonList[i].getText()) || "2".equals(buttonList[i].getText()))){
                 int move = changeTile();
