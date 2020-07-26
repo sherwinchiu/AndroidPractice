@@ -88,7 +88,7 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
             for(int j = 0; j < 3; j++){
                System.out.print(moves[i][j]);
                moves[i][j] = 0;
-               scores[player]++;
+               scores[player-1]++;
                currentMove = CIRCLE;
             }
             System.out.println();
@@ -97,31 +97,31 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
             buttonList[i].setText("");
         }
     }
-    private int checkWon(int player, int i, int j, int score){
-        if(player == moves[i][j]){
-            score++;
-            if(score == 3){
-                resetMoves(player);
-                return 0;
-            }
-        }
-        return score;
+    private int checkWon(int player, int i, int j){
+        if (player == moves[i][j])
+            return 1;
+        return 0;
+    }
+    private void checkScore(int score, int player){
+        if(score == 3)
+            resetMoves(player);
     }
     /**
      * Checks if game has been won by a player, or if their is a draw
      * @author Sherwin Chiu
      */
-    private void gameWon(){
+    private void winGame(){
         int victoryScore = 0;
         for (int players = 1; players < 3; players++) {
+            System.out.println(players);
             for(int i = 0; i < 3; i++){
                 for(int j = 0; j < 3; j++) {
-                // Check if won horizontal
-                    victoryScore = checkWon(players, i, j, victoryScore);
-
+                // Check if won horizontal(---)
+                    victoryScore += checkWon(players, i, j);
+                    checkScore(victoryScore, players);
                 }
                 victoryScore = 0;
-                // Check if won vertical
+                // Check if won vertical (|||)
                 for(int j = 0; j < 3; j++){
                     if (players == moves[j][i]){
                         victoryScore++;
@@ -132,7 +132,7 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
                     }
                 }
                 victoryScore = 0;
-                // Check if won diagonal
+                // Check if won diagonal (\)
                 for(int j = 0; j < 3; j++){
                     if(players == moves[j][j]){
                         victoryScore++;
@@ -143,15 +143,7 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
                     }
                 }
                 victoryScore = 0;
-                for(int j = 0; j < 3; j++){
-                    if(players == moves[2-j][2-j]){
-                        victoryScore++;
-                        if(victoryScore == 3){
-                            victoryScore = 0;
-                            resetMoves(players);
-                        }
-                    }
-                }
+
             }
         }
 
@@ -170,8 +162,7 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
                 buttonList[i].setText(String.valueOf(move));
             }
         }
-
-        gameWon();
+        winGame();
     }
 
 }
