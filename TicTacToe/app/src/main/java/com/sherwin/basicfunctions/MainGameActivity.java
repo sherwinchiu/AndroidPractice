@@ -97,6 +97,16 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
             buttonList[i].setText("");
         }
     }
+    private int checkWon(int player, int i, int j, int score){
+        if(player == moves[i][j]){
+            score++;
+            if(score == 3){
+                resetMoves(player);
+                return 0;
+            }
+        }
+        return score;
+    }
     /**
      * Checks if game has been won by a player, or if their is a draw
      * @author Sherwin Chiu
@@ -107,13 +117,8 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
             for(int i = 0; i < 3; i++){
                 for(int j = 0; j < 3; j++) {
                 // Check if won horizontal
-                    if (players == moves[i][j]) {
-                        victoryScore++;
-                        if (victoryScore == 3) {
-                            victoryScore = 0;
-                            resetMoves(players);
-                        }
-                    }
+                    victoryScore = checkWon(players, i, j, victoryScore);
+
                 }
                 victoryScore = 0;
                 // Check if won vertical
@@ -127,11 +132,31 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
                     }
                 }
                 victoryScore = 0;
+                // Check if won diagonal
+                for(int j = 0; j < 3; j++){
+                    if(players == moves[j][j]){
+                        victoryScore++;
+                        if(victoryScore == 3){
+                            victoryScore = 0;
+                            resetMoves(players);
+                        }
+                    }
+                }
+                victoryScore = 0;
+                for(int j = 0; j < 3; j++){
+                    if(players == moves[2-j][2-j]){
+                        victoryScore++;
+                        if(victoryScore == 3){
+                            victoryScore = 0;
+                            resetMoves(players);
+                        }
+                    }
+                }
             }
         }
 
 
-        // Check if won diagonal
+
         // Check if draw
     }
     @Override
