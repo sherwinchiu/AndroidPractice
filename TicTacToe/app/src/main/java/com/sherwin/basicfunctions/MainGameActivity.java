@@ -30,6 +30,7 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
     private int buttonAccesses[] = new int [9];
     private static boolean inPlay = true;
     private char currentMove = 1; // 1 for O, 2 for X
+    private int victoryScore = 0;
     private TextView score1TextView;
     private TextView score2TextView;
     @Override
@@ -88,7 +89,9 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
             for(int j = 0; j < 3; j++){
                System.out.print(moves[i][j]);
                moves[i][j] = 0;
-               scores[player-1]++;
+               if(player > 0){
+                   scores[player-1]++;
+               }
                currentMove = CIRCLE;
             }
             System.out.println();
@@ -106,14 +109,22 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
         if(score == 3)
             resetMoves(player);
     }
+    private void checkDraw(){
+        int counter = 0;
+        for(int i = 0; i < 9; i++){
+            if (buttonList[i].getText().length()>0){
+                counter++;
+            }
+        }
+        if (counter == 9);
+        resetMoves(0);
+    }
     /**
      * Checks if game has been won by a player, or if their is a draw
      * @author Sherwin Chiu
      */
     private void winGame(){
-        int victoryScore = 0;
         for (int players = 1; players < 3; players++) {
-            System.out.println(players);
             for(int i = 0; i < 3; i++){
                 for(int j = 0; j < 3; j++) {
                 // Check if won horizontal(---)
@@ -128,17 +139,20 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
                 }
                 victoryScore = 0;
             }
+            // Check if won diagonal (\)
             for(int i = 0; i < 3; i++){
-                // Check if won diagonal (\)
                 victoryScore += checkWon(players, i, i);
                 checkScore(victoryScore, players);
             }
-
+            victoryScore = 0;
+            for(int i = 0; i < 3; i++){
+                victoryScore += checkWon(players, i, 2-i);
+                checkScore(victoryScore, players);
+            }
+            victoryScore = 0;
         }
-
-
-
         // Check if draw
+        checkDraw();
     }
     @Override
     public void onClick(View view){
