@@ -52,7 +52,6 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
         score2TextView.setText(String.valueOf(scores[1]));
         initializeButtons();
     }
-
     /**
      * Changes the tile a user presses
      * @author Sherwin Chiu
@@ -71,13 +70,12 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
      * Initializes the 9 buttons used for the TicTacToe grid
      * @author Sherwin Chiu
      */
-    private void initializeButtons(){
-        for(int i = 0; i < buttonList.length; i++) {
+    private void initializeButtons() {
+        for (int i = 0; i < buttonList.length; i++) {
             buttonList[i] = (Button) findViewById(buttonIds[i]);
             buttonList[i].setOnClickListener(this);
         }
     }
-
     /**
      * Resets the moves on the board
      * @author Sherwin Chiu
