@@ -11,6 +11,7 @@ import android.widget.TextView;
 public class MainGameActivity extends AppCompatActivity implements View.OnClickListener{
     private final char CIRCLE = 1;
     private final char CROSS = 2;
+    private final char MAX_MOVES = 9;
     public static int buttonIds[] = {
             R.id.button1,
             R.id.button2,
@@ -81,8 +82,8 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
      * @author Sherwin Chiu
      */
     private void resetMoves(int player){
-        for(int i = 0; i < 3; i++){
-            for(int j = 0; j < 3; j++){
+        for(int i = 0; i < moves.length; i++){
+            for(int j = 0; j < moves.length; j++){
                System.out.print(moves[i][j]);
                moves[i][j] = 0;
                if(player > 0){
@@ -102,27 +103,27 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
      */
     private void winGame(){
         for (int players = 1; players < 3; players++) {
-            for(int i = 0; i < 3; i++){
-                for(int j = 0; j < 3; j++) {
+            for(int i = 0; i < moves.length; i++){
+                for(int j = 0; j < moves.length; j++) {
                 // Check if won horizontal(---)
                     victoryScore += checkWon(players, i, j);
                     checkScore(victoryScore, players);
                 }
                 victoryScore = 0;
                 // Check if won vertical (|||)
-                for(int j = 0; j < 3; j++){
+                for(int j = 0; j < moves.length; j++){
                     victoryScore += checkWon(players, j, i);
                     checkScore(victoryScore, players);
                 }
                 victoryScore = 0;
             }
             // Check if won diagonal (\)
-            for(int i = 0; i < 3; i++){
+            for(int i = 0; i < moves.length; i++){
                 victoryScore += checkWon(players, i, i);
                 checkScore(victoryScore, players);
             }
             victoryScore = 0;
-            for(int i = 0; i < 3; i++){
+            for(int i = 0; i < moves.length; i++){
                 victoryScore += checkWon(players, i, 2-i);
                 checkScore(victoryScore, players);
             }
@@ -166,7 +167,7 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
                 counter++;
             }
         }
-        if (counter == 9)
+        if (counter == MAX_MOVES)
             resetMoves(0);
     }
     @Override
