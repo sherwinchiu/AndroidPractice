@@ -84,15 +84,12 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
     private void resetMoves(int player){
         for(int i = 0; i < moves.length; i++){
             for(int j = 0; j < moves.length; j++){
-               System.out.print(moves[i][j]);
                moves[i][j] = 0;
-               if(player > 0){
-                   scores[player-1]++;
-               }
                currentMove = CIRCLE;
             }
-            System.out.println();
         }
+        if(player > 0)
+            scores[player-1]++;
         for(int i = 0; i < buttonList.length; i++){
             buttonList[i].setText("");
         }
@@ -107,26 +104,26 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
                 for(int j = 0; j < moves.length; j++) {
                 // Check if won horizontal(---)
                     victoryScore += checkWon(players, i, j);
-                    checkScore(victoryScore, players);
                 }
+                checkScore(victoryScore, players);
                 victoryScore = 0;
                 // Check if won vertical (|||)
                 for(int j = 0; j < moves.length; j++){
                     victoryScore += checkWon(players, j, i);
-                    checkScore(victoryScore, players);
                 }
+                checkScore(victoryScore, players);
                 victoryScore = 0;
             }
             // Check if won diagonal (\)
             for(int i = 0; i < moves.length; i++){
                 victoryScore += checkWon(players, i, i);
-                checkScore(victoryScore, players);
             }
+            checkScore(victoryScore, players);
             victoryScore = 0;
             for(int i = 0; i < moves.length; i++){
                 victoryScore += checkWon(players, i, 2-i);
-                checkScore(victoryScore, players);
             }
+            checkScore(victoryScore, players);
             victoryScore = 0;
         }
         // Check if draw
@@ -181,6 +178,8 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
             }
         }
         winGame();
+        score1TextView.setText(String.valueOf(scores[0]));
+        score2TextView.setText(String.valueOf(scores[1]));
     }
 
 }
