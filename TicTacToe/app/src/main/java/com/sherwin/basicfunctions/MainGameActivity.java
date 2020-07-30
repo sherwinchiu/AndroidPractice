@@ -35,6 +35,8 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
     private TextView score2TextView;
     private ImageView circleImageView;
     private ImageView crossImageView;
+    private ImageView playerPieces[] = new ImageView[2];
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +57,26 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
         score2TextView.setText(String.valueOf(scores[1]));
         circleImageView = (ImageView) findViewById(R.id.imageView1);
         crossImageView = (ImageView) findViewById(R.id.imageView2);
-
+        initializeImageViews()
         initializeButtons();
+    }
+
+    /**
+     * Adds image views to list
+     */
+    private void initializeImageViews(){
+        playerPieces[0] = circleImageView;
+        playerPieces[1] = crossImageView;
+    }
+
+    /**
+     * Adds button views to list
+     */
+    private void initializeButtons() {
+        for (int i = 0; i < buttonList.length; i++) {
+            buttonList[i] = (Button) findViewById(buttonIds[i]);
+            buttonList[i].setOnClickListener(this);
+        }
     }
     /**
      * Changes the tile a user presses
@@ -76,12 +96,7 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
      * Initializes the 9 buttons used for the TicTacToe grid
      * @author Sherwin Chiu
      */
-    private void initializeButtons() {
-        for (int i = 0; i < buttonList.length; i++) {
-            buttonList[i] = (Button) findViewById(buttonIds[i]);
-            buttonList[i].setOnClickListener(this);
-        }
-    }
+
     /**
      * Resets the moves on the board
      * @author Sherwin Chiu
