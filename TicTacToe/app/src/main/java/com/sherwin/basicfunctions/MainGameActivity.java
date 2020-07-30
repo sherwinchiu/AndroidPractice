@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainGameActivity extends AppCompatActivity implements View.OnClickListener{
@@ -32,6 +33,9 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
     private int victoryScore = 0;
     private TextView score1TextView;
     private TextView score2TextView;
+    private ImageView circleImageView;
+    private ImageView crossImageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +53,9 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
         score2TextView = (TextView) findViewById(R.id.score2TextView);
         score1TextView.setText(String.valueOf(scores[0]));
         score2TextView.setText(String.valueOf(scores[1]));
+        circleImageView = (ImageView) findViewById(R.id.imageView1);
+        crossImageView = (ImageView) findViewById(R.id.imageView2);
+
         initializeButtons();
     }
     /**
@@ -174,7 +181,7 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
                 int move = changeTile();
                 moves[(int) (i / 3)][i % 3] = move;
                 buttonList[i].setText(String.valueOf(move));
-                buttonList[i].setForeground(getDrawable(R.id.));
+                buttonList[i].setForeground(getDrawable(R.id.imageView1));
             }
         }
         winGame();
