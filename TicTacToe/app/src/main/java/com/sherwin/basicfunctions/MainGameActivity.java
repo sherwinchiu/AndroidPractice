@@ -28,8 +28,6 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
                                 {0, 0, 0},   // 1 is O circle
                                 {0, 0, 0}}; // 2 is X cross
     private static int scores[] = {0, 0};
-    private int buttonAccesses[] = new int [9];
-    private static boolean inPlay = true;
     private char currentMove = 1; // 1 for O, 2 for X
     private int victoryScore = 0;
     private TextView score1TextView;
