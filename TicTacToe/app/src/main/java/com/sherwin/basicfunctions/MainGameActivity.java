@@ -1,8 +1,10 @@
 package com.sherwin.basicfunctions;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +15,7 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
     private final char CIRCLE = 1;
     private final char CROSS = 2;
     private final char MAX_MOVES = 9;
-    public static int buttonIds[] = {
+    public int buttonIds[] = {
             R.id.button1,
             R.id.button2,
             R.id.button3,
@@ -22,7 +24,7 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
             R.id.button6,
             R.id.button7,
             R.id.button8,
-            R.id.button9,
+            R.id.button9
     };
     private Button buttonList[] = new Button[9];
     private int moves[][] = {  {0, 0, 0},   // 0 is blank
@@ -33,9 +35,10 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
     private int victoryScore = 0;
     private TextView score1TextView;
     private TextView score2TextView;
-    private ImageView circleImageView;
-    private ImageView crossImageView;
-    private ImageView playerPieces[] = new ImageView[2];
+    private int playerPieces[] = {
+            R.id.imageView1,
+            R.id.imageView2
+    };
 
 
     @Override
@@ -55,20 +58,8 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
         score2TextView = (TextView) findViewById(R.id.score2TextView);
         score1TextView.setText(String.valueOf(scores[0]));
         score2TextView.setText(String.valueOf(scores[1]));
-        circleImageView = (ImageView) findViewById(R.id.imageView1);
-        crossImageView = (ImageView) findViewById(R.id.imageView2);
-        initializeImageViews()
         initializeButtons();
     }
-
-    /**
-     * Adds image views to list
-     */
-    private void initializeImageViews(){
-        playerPieces[0] = circleImageView;
-        playerPieces[1] = crossImageView;
-    }
-
     /**
      * Adds button views to list
      */
@@ -112,7 +103,9 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
             scores[player-1]++;
         for(int i = 0; i < buttonList.length; i++){
             buttonList[i].setText("");
-            buttonList[i].setForeground(;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                buttonList[i].setForeground(AppCompatResources.getDrawable(this, playerPieces[player]));
+            }
         }
     }
     /**
@@ -196,7 +189,9 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
                 int move = changeTile();
                 moves[(int) (i / 3)][i % 3] = move;
                 buttonList[i].setText(String.valueOf(move));
-                buttonList[i].setForeground(getDrawable(R.id.imageView1));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    buttonList[i].setForeground(AppCompatResources.getDrawable(this, playerPieces[move]));
+                }
             }
         }
         winGame();
