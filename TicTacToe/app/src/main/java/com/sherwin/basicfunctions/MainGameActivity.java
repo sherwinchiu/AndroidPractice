@@ -90,6 +90,7 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
             scores[player-1]++;
         for(int i = 0; i < buttonList.length; i++){
             buttonList[i].setText("");
+            buttonList[i].setForeground(;
         }
     }
     /**
@@ -173,6 +174,7 @@ public class MainGameActivity extends AppCompatActivity implements View.OnClickL
                 int move = changeTile();
                 moves[(int) (i / 3)][i % 3] = move;
                 buttonList[i].setText(String.valueOf(move));
+                buttonList[i].setForeground(getDrawable(R.id.));
             }
         }
         winGame();
